@@ -130,97 +130,211 @@
      </widget>
     </widget>
     <widget class="QWidget" name="page1">
-     <widget class="QPushButton" name="back_main1">
+     <widget class="QGroupBox" name="groupBox_4">
       <property name="geometry">
        <rect>
-        <x>470</x>
-        <y>130</y>
-        <width>95</width>
-        <height>71</height>
+        <x>20</x>
+        <y>20</y>
+        <width>521</width>
+        <height>151</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Main Page</string>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
-     </widget>
-     <widget class="QWidget" name="">
-      <property name="geometry">
-       <rect>
-        <x>170</x>
-        <y>130</y>
-        <width>241</width>
-        <height>71</height>
-       </rect>
+      <property name="title">
+       <string>Port 1</string>
       </property>
-      <layout class="QFormLayout" name="formLayout">
-       <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QSpinBox" name="spinBox"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QSpinBox" name="spinBox_2"/>
-       </item>
-      </layout>
+      <widget class="QPushButton" name="back_main1">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>40</y>
+         <width>95</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Main Page</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>40</y>
+         <width>66</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Sin 1</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>90</y>
+         <width>66</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Sin 2</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinSin1">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>30</y>
+         <width>111</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>-360</number>
+       </property>
+       <property name="maximum">
+        <number>360</number>
+       </property>
+       <property name="singleStep">
+        <number>90</number>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="displayIntegerBase">
+        <number>10</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinSin2">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>80</y>
+         <width>111</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>-360</number>
+       </property>
+       <property name="maximum">
+        <number>360</number>
+       </property>
+       <property name="singleStep">
+        <number>90</number>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="page2">
-     <widget class="QWidget" name="layoutWidget_3">
+     <widget class="QGroupBox" name="groupBox_3">
       <property name="geometry">
        <rect>
-        <x>180</x>
-        <y>130</y>
-        <width>241</width>
-        <height>71</height>
+        <x>20</x>
+        <y>20</y>
+        <width>521</width>
+        <height>151</height>
        </rect>
       </property>
-      <layout class="QFormLayout" name="formLayout_2">
-       <item row="0" column="0">
-        <widget class="QPushButton" name="pushButton_5">
-         <property name="text">
-          <string>val 2</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QSpinBox" name="spinBox_3"/>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_6">
-         <property name="text">
-          <string>PushButton</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QSpinBox" name="spinBox_4"/>
-       </item>
-      </layout>
-     </widget>
-     <widget class="QPushButton" name="back_main2">
-      <property name="geometry">
-       <rect>
-        <x>470</x>
-        <y>130</y>
-        <width>95</width>
-        <height>71</height>
-       </rect>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 255, 255);</string>
       </property>
-      <property name="text">
-       <string>Main Page</string>
+      <property name="title">
+       <string>Port 2</string>
       </property>
+      <widget class="QPushButton" name="back_main2">
+       <property name="geometry">
+        <rect>
+         <x>364</x>
+         <y>36</y>
+         <width>91</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Main Page</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinCos1">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>30</y>
+         <width>111</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>-360</number>
+       </property>
+       <property name="maximum">
+        <number>360</number>
+       </property>
+       <property name="singleStep">
+        <number>90</number>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+       <property name="displayIntegerBase">
+        <number>10</number>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spinCos2">
+       <property name="geometry">
+        <rect>
+         <x>170</x>
+         <y>80</y>
+         <width>111</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="minimum">
+        <number>-360</number>
+       </property>
+       <property name="maximum">
+        <number>360</number>
+       </property>
+       <property name="singleStep">
+        <number>90</number>
+       </property>
+       <property name="value">
+        <number>0</number>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>40</y>
+         <width>66</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cos 1</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>80</x>
+         <y>90</y>
+         <width>66</width>
+         <height>20</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Cos 2</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>

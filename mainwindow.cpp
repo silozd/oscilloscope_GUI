@@ -13,8 +13,6 @@
 #include <QMenu>
 #include <QLinearGradient>
 
-
-
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -25,7 +23,9 @@ MainWindow::MainWindow(QWidget *parent) :
     time_t = new QTimer(this);
     time_t->setInterval(100);
 
-    connect(time_t, SIGNAL(timeout()),this,SLOT(on_btn1_clicked()));
+    connect(time_t, SIGNAL(timeout()),this,SLOT(on_show_sig_clicked()));
+
+///////////////////  // *****  ADDING  TWO  GRAPHICS  **** // //////////////////////////////
 
     customPlot = new QCustomPlot(ui->gl_widget);
     customPlot->addGraph();
@@ -34,6 +34,15 @@ MainWindow::MainWindow(QWidget *parent) :
     customPlot->xAxis->setLabel("x");
     customPlot->graph(0)->setPen(QPen(Qt::blue));
     customPlot->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
+    customPlot->addGraph();
+    customPlot->setGeometry(0,0,ui->gl_widget->width(),ui->gl_widget->height());
+    customPlot->graph(1)->setPen(QPen(Qt::red));
+    customPlot->graph(1)->setBrush(QBrush(QColor(255, 0, 0, 20)));
+    customPlot->rescaleAxes();
+    customPlot->axisRect()->setupFullAxesBox();
+
+///////////////////  //  **** CUSTOMIZE  GRAPHICS  ***** // //////////////////////////////
+
     customPlot->setBackground(QColor(200,255,255));
     customPlot->xAxis->setBasePen(QPen(Qt::black, 1));
     customPlot->yAxis->setBasePen(QPen(Qt::black, 1));
@@ -63,9 +72,11 @@ MainWindow::~MainWindow()
 }
 
 
+///////////////////  // *****  ADDING FUNCTIONAL SLOTS  *****   // //////////////////////////////
+
 void MainWindow::on_show_sig_clicked()
 {
-
+  time_t->start();
   customPlot->replot();
 
  }
@@ -74,24 +85,48 @@ void MainWindow::on_go_page1_clicked()
 {
     ui->mainPage->close();
     ui->page1->show();
+    int deg1 = ui->spinSin1->value();
+    int deg2 = ui->spinSin2->value();
+    static double val_x = 0;
+
+    val_x = val_x + 10;
+    val_y= sin(((double)val_x*M_PI)/deg1) + sin(((double)val_x*M_PI)/deg2);
+
+}
+
+void MainWindow::on_back_main1_clicked()
+{
+    ui->page1->close();
+    ui->mainPage->show();
+
+//    time_t->start();
+    customPlot->xAxis->setRange(0 , val_x + 1);
+    customPlot->yAxis->setRange(val_y - 2 , val_y + 2);
+    customPlot->graph(0)->rescaleValueAxis(true,true);
+    customPlot->graph(0)->addData(val_x , val_y);
+
 }
 
 void MainWindow::on_go_page2_clicked()
 {
     ui->mainPage->close();
     ui->page2->show();
+    int deg3 = ui->spinCos1->value();
+    int deg4 = ui->spinCos2->value();
+    static double val_x = 0;
 
+    val_x = val_x + 10;
+    val_t= cos(((double)val_x*M_PI)/deg3) + cos(((double)val_x*M_PI)/deg4);
 }
 
-void MainWindow::on_back_main1_clicked()
-{
-    ui->mainPage->show();
-    ui->page1->close();
-
-}
 
 void MainWindow::on_back_main2_clicked()
 {
-    ui->mainPage->show();
     ui->page2->close();
+    ui->mainPage->show();
+
+//    time_t->start();
+    customPlot->xAxis2->setRange(0 , val_x + 1);
+    customPlot->yAxis2->setRange(val_t - 3 , val_t + 3);
+    customPlot->graph(1)->addData(val_x , val_t);
 }
