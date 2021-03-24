@@ -24,7 +24,7 @@ public:
 private slots:
     void addRandomGraph();
     void contextMenuRequest(QPoint pos);
-
+    void graphClicked(QCPAbstractPlottable *plottable, int dataIndex);
 
 private:
     Ui::MainWindow *ui;

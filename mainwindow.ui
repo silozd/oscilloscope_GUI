@@ -23,20 +23,10 @@
    <widget class="QOpenGLWidget" name="gl_widget">
     <property name="geometry">
      <rect>
-      <x>370</x>
-      <y>150</y>
-      <width>481</width>
-      <height>271</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QWidget" name="widget" native="true">
-    <property name="geometry">
-     <rect>
-      <x>130</x>
+      <x>100</x>
       <y>30</y>
-      <width>201</width>
-      <height>161</height>
+      <width>751</width>
+      <height>421</height>
      </rect>
     </property>
    </widget>

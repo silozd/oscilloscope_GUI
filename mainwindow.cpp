@@ -20,6 +20,8 @@ MainWindow::MainWindow(QWidget *parent) :
     customPlot->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
     customPlot->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(customPlot, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequest(QPoint)));
+
+    customPlot->rescaleAxes();
 }
 
 MainWindow::~MainWindow()
@@ -54,13 +56,23 @@ void MainWindow::addRandomGraph()
   graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
   customPlot->graph()->setPen(graphPen);
   customPlot->replot();
-  //selam cınım nasılsın
+
+
  }
 void MainWindow::contextMenuRequest(QPoint pos)
 {
   QMenu *menu = new QMenu(this);
   menu->setAttribute(Qt::WA_DeleteOnClose);
-  menu->addAction("Add random graph", this, SLOT(addRandomGraph()));
-  if (customPlot->selectedGraphs().size() > 0)
+  if (customPlot->legend->selectTest(pos, false) >= 0) // context menu on legend requested
+   {}
+  else{
+  menu->addAction("Add random graph", this, SLOT(addRandomGraph()));}
   menu->popup(customPlot->mapToGlobal(pos));
+}
+
+void MainWindow::graphClicked(QCPAbstractPlottable *plottable, int dataIndex)
+{
+  double dataValue = plottable->interface1D()->dataMainValue(dataIndex);
+  QString message = QString("Clicked on graph '%1' at data point #%2 with value %3.").arg(plottable->name()).arg(dataIndex).arg(dataValue);
+  ui->statusBar->showMessage(message, 2500);
 }
