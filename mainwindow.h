@@ -8,7 +8,6 @@
 #include <QTabWidget>
 #include <QScrollBar>
 #include <QtQuickWidgets/QQuickWidget>
-#include <QGraphicsView>
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +22,7 @@ public:
     ~MainWindow();
 
     double val_x, val_y, val_t;
+    char bak;
 
 private:
     Ui::MainWindow *ui;
@@ -47,6 +47,11 @@ private slots:
 
     void on_back_main2_clicked();
 
+  //  void mousePress();
+
+  //  void mouseWheel();
+
+    void CreateGraph();
 
 };
 
