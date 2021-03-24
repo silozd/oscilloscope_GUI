@@ -1,8 +1,18 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "qcustomplot.h"
-#include "math.h"
+#include <math.h>
+#include <QTimer>
 #include <QGraphicsView>
+#include <QString>
+#include <QApplication>
+#include <QAction>
+#include <QPalette>
+#include <QColor>
+#include <QPen>
+#include <QMenu>
+#include <QLinearGradient>
+
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -10,6 +20,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->mainPage->show();
+
+    time_t = new QTimer(this);
+    time_t->setInterval(100);
+
+    connect(time_t, SIGNAL(timeout()),this,SLOT(on_btn1_clicked()));
 
     customPlot = new QCustomPlot(ui->gl_widget);
     customPlot->addGraph();
@@ -18,61 +34,64 @@ MainWindow::MainWindow(QWidget *parent) :
     customPlot->xAxis->setLabel("x");
     customPlot->graph(0)->setPen(QPen(Qt::blue));
     customPlot->graph(0)->setBrush(QBrush(QColor(0, 0, 255, 20)));
-    customPlot->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(customPlot, SIGNAL(customContextMenuRequested(QPoint)), this, SLOT(contextMenuRequest(QPoint)));
-
+    customPlot->setBackground(QColor(200,255,255));
+    customPlot->xAxis->setBasePen(QPen(Qt::black, 1));
+    customPlot->yAxis->setBasePen(QPen(Qt::black, 1));
+    customPlot->xAxis->setTickPen(QPen(Qt::black, 1));
+    customPlot->yAxis->setTickPen(QPen(Qt::black, 1));
+    customPlot->xAxis->setSubTickPen(QPen(Qt::black, 1));
+    customPlot->yAxis->setSubTickPen(QPen(Qt::black, 1));
+    customPlot->xAxis->setTickLabelColor(Qt::black);
+    customPlot->yAxis->setTickLabelColor(Qt::black);
+    customPlot->xAxis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+    customPlot->yAxis->grid()->setPen(QPen(QColor(140, 140, 140), 1, Qt::DotLine));
+    customPlot->xAxis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+    customPlot->yAxis->grid()->setSubGridPen(QPen(QColor(80, 80, 80), 1, Qt::DotLine));
+    customPlot->xAxis->grid()->setSubGridVisible(true);
+    customPlot->yAxis->grid()->setSubGridVisible(true);
+    customPlot->xAxis->grid()->setZeroLinePen(Qt::NoPen);
+    customPlot->yAxis->grid()->setZeroLinePen(Qt::NoPen);
+    customPlot->xAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
+    customPlot->yAxis->setUpperEnding(QCPLineEnding::esSpikeArrow);
     customPlot->rescaleAxes();
+
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-void MainWindow::addRandomGraph()
+
+
+void MainWindow::on_show_sig_clicked()
 {
-  int n = 50;
-  double xScale = (rand()/(double)RAND_MAX + 0.5)*2;
-  double yScale = (rand()/(double)RAND_MAX + 0.5)*2;
-  double xOffset = (rand()/(double)RAND_MAX - 0.5)*4;
-  double yOffset = (rand()/(double)RAND_MAX - 0.5)*10;
-  double r1 = (rand()/(double)RAND_MAX - 0.5)*2;
-  double r2 = (rand()/(double)RAND_MAX - 0.5)*2;
-  double r3 = (rand()/(double)RAND_MAX - 0.5)*2;
-  double r4 = (rand()/(double)RAND_MAX - 0.5)*2;
-  QVector<double> x(n), y(n);
-  for (int i=0; i<n; i++)
-  {
-    x[i] = (i/(double)n-0.5)*10.0*xScale + xOffset;
-    y[i] = (qSin(x[i]*r1*5)*qSin(qCos(x[i]*r2)*r4*3)+r3*qCos(qSin(x[i])*r4*2))*yScale + yOffset;
-  }
-  customPlot->addGraph();
-  customPlot->graph()->setName(QString("New graph %1").arg(customPlot->graphCount()-1));
-  customPlot->graph()->setData(x, y);
-  customPlot->graph()->setLineStyle((QCPGraph::LineStyle)(rand()%5+1));
-  if (rand()%100 > 50)
-    customPlot->graph()->setScatterStyle(QCPScatterStyle((QCPScatterStyle::ScatterShape)(rand()%14+1)));
-  QPen graphPen;
-  graphPen.setColor(QColor(rand()%245+10, rand()%245+10, rand()%245+10));
-  graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
-  customPlot->graph()->setPen(graphPen);
+
   customPlot->replot();
 
-
  }
-void MainWindow::contextMenuRequest(QPoint pos)
+
+void MainWindow::on_go_page1_clicked()
 {
-  QMenu *menu = new QMenu(this);
-  menu->setAttribute(Qt::WA_DeleteOnClose);
-  if (customPlot->legend->selectTest(pos, false) >= 0) // context menu on legend requested
-   {}
-  else{
-  menu->addAction("Add random graph", this, SLOT(addRandomGraph()));}
-  menu->popup(customPlot->mapToGlobal(pos));
+    ui->mainPage->close();
+    ui->page1->show();
 }
 
-void MainWindow::graphClicked(QCPAbstractPlottable *plottable, int dataIndex)
+void MainWindow::on_go_page2_clicked()
 {
-  double dataValue = plottable->interface1D()->dataMainValue(dataIndex);
-  QString message = QString("Clicked on graph '%1' at data point #%2 with value %3.").arg(plottable->name()).arg(dataIndex).arg(dataValue);
-  ui->statusBar->showMessage(message, 2500);
+    ui->mainPage->close();
+    ui->page2->show();
+
+}
+
+void MainWindow::on_back_main1_clicked()
+{
+    ui->mainPage->show();
+    ui->page1->close();
+
+}
+
+void MainWindow::on_back_main2_clicked()
+{
+    ui->mainPage->show();
+    ui->page2->close();
 }
