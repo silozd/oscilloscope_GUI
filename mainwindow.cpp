@@ -54,6 +54,7 @@ void MainWindow::addRandomGraph()
   graphPen.setWidthF(rand()/(double)RAND_MAX*2+1);
   customPlot->graph()->setPen(graphPen);
   customPlot->replot();
+  //selam cınım nasılsın
  }
 void MainWindow::contextMenuRequest(QPoint pos)
 {
@@ -61,3 +62,5 @@ void MainWindow::contextMenuRequest(QPoint pos)
   menu->setAttribute(Qt::WA_DeleteOnClose);
   menu->addAction("Add random graph", this, SLOT(addRandomGraph()));
   if (customPlot->selectedGraphs().size() > 0)
+  menu->popup(customPlot->mapToGlobal(pos));
+}
